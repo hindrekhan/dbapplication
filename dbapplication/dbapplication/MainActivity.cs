@@ -20,8 +20,23 @@ namespace dbapplication
             string dbPath = Path.Combine(
                 System.Environment.GetFolderPath(
                     System.Environment.SpecialFolder.Personal), "mydatabase.db3");
+
             var db = new SQLiteConnection(dbPath);
 
+            db.CreateTable<Stock>();
+            if (db.Table<Stock>().Count() == 0)
+            {
+
+            }
+
         }
+    }
+
+    public class Stock
+    {
+        [PrimaryKey, AutoIncrement, Column("_id")]
+        public int Id { get; set; }
+        [MaxLength(8)]
+        public string Symbol { get; set; }
     }
 }
