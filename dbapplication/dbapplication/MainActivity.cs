@@ -26,6 +26,7 @@ namespace dbapplication
             db.CreateTable<Stock>();
             if (db.Table<Stock>().Count() == 0)
             {
+                var newStock = new Stock();
 
             }
 
