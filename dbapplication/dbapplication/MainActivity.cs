@@ -17,19 +17,15 @@ namespace dbapplication
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
-            string dbPath = Path.Combine(
-                System.Environment.GetFolderPath(
-                    System.Environment.SpecialFolder.Personal), "mydatabase.db3");
+            var databaseService = new DatabaseService();
+            databaseService.CreateDatabase();
+            databaseService.CreateTableWithData();
+            var table = databaseService.GetAllStocks();
 
-            var db = new SQLiteConnection(dbPath);
-
-            db.CreateTable<Stock>();
-            if (db.Table<Stock>().Count() == 0)
+            foreach (var s in table)
             {
-                var newStock = new Stock();
-
+                System.Diagnostics.Debug.WriteLine(s.Id + " " + s.Symbol);
             }
-
         }
     }
 
